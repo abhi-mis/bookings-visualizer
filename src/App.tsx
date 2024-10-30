@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { DateRangeSelector } from './components/DateRangeSelector';
+import { SparklineCard } from './components/SparklineCard';
+import { VisitorsChart } from './components/VisitorsChart';
+import { CountryChart } from './components/CountryChart';
 import { Hotel } from 'lucide-react';
 import bookingsData from './data/bookings.json';
-import { SparklineCard } from './components/SparklineCard';
-import { DateRangeSelector } from './components/DateRangeSelector';
 import { getMonthNumber } from './utils/utils';
-import './App.css'
+
 
 function App() {
   const [startDate, setStartDate] = useState(new Date('2015-07-01'));
@@ -22,6 +24,8 @@ function App() {
     });
     setFilteredData(filtered);
   }, [startDate, endDate]);
+
+
 
   const handleDateChange = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
@@ -42,20 +46,6 @@ function App() {
               <p className="text-sm text-gray-600">Real-time booking insights</p>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <SparklineCard
-              title="Adult Visitors"
-              data={filteredData}
-              type="adults"
-            />
-            <SparklineCard
-              title="Children Visitors"
-              data={filteredData}
-              type="children"
-            />
-          </div>
-
           <DateRangeSelector
             startDate={startDate}
             endDate={endDate}
@@ -63,8 +53,26 @@ function App() {
           />
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <SparklineCard
+            title="Adult Visitors"
+            data={filteredData}
+            type="adults"
+          />
+          <SparklineCard
+            title="Children Visitors"
+            data={filteredData}
+            type="children"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <VisitorsChart data={filteredData} />
+          <CountryChart data={filteredData} />
+        </div>
       </div>
     </div>
   );
 }
-export default App
+
+export default App;
