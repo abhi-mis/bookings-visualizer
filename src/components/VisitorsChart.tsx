@@ -103,7 +103,8 @@ export const VisitorsChart: React.FC<VisitorsChartProps> = ({ data }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-      <Chart
+      <Chart 
+        data-test-id="visitors-chart"
         options={options}
         series={series}
         type="area"
