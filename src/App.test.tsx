@@ -32,13 +32,9 @@ describe('App Component', () => {
     test('renders multiple SparklineCards and charts', () => {
         render(<App />);
     
-        // Use getAllByTestId to get all elements with the specified data-testid
         const sparklineCards = screen.getAllByTestId('mocked-sparkline-card');
     
-        // Check if there are two SparklineCard components rendered
         expect(sparklineCards).toHaveLength(2);
-    
-        // Optionally, verify specific content within each SparklineCard
         sparklineCards.forEach((card) => {
             expect(card).toBeInTheDocument();
         });
